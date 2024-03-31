@@ -8,7 +8,7 @@ namespace UserControlSystem
     public class SelectableValue : ScriptableObject
     {
         public ISelectable CurrentValue { get; private set; }
-        public Action<ISelectable> OnSelected;
+        public event Action<ISelectable> OnSelected = delegate { };
 
         public void SetValue(ISelectable value)
         {
