@@ -165,6 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 963194227}
   _selectedObject: {fileID: 11400000, guid: 7141aae4b16134e49af0215b6da77bcf, type: 2}
+  _eventSystem: {fileID: 467524304}
 --- !u!1 &168921228
 GameObject:
   m_ObjectHideFlags: 0

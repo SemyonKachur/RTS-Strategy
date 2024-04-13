@@ -2094,6 +2094,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6160555653546850199}
   - component: {fileID: 1356716169754181836}
+  - component: {fileID: 4746463452527353441}
+  - component: {fileID: 2622102861798969945}
+  - component: {fileID: 5396057464139711621}
+  - component: {fileID: 2206153576100902948}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -2247,6 +2251,74 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.000000014901161, y: 0.2972716, z: 0.12567535}
     m_Extent: {x: 0.43989497, y: 0.5674504, z: 0.81411386}
   m_DirtyAABB: 0
+--- !u!114 &4746463452527353441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5857765741386643418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0.98213625, g: 0, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!65 &2622102861798969945
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5857765741386643418}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.87978995, y: 0.99172676, z: 1.4749184}
+  m_Center: {x: 0, y: 0.5149105, z: -0.093037605}
+--- !u!114 &5396057464139711621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5857765741386643418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1a0ff5a736fa804099f10bb3db0cef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  maxHealth: 100
+  icon: {fileID: 21300000, guid: 45ad18b695a1a5b49ae45b747304c3c8, type: 3}
+--- !u!114 &2206153576100902948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5857765741386643418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe6ecbfe2605f13418d52ddf6a83bd92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selectedValue: {fileID: 11400000, guid: 7141aae4b16134e49af0215b6da77bcf, type: 2}
+  _outline: {fileID: 4746463452527353441}
 --- !u!1 &6289930750945334063
 GameObject:
   m_ObjectHideFlags: 0
