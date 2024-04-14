@@ -166,6 +166,7 @@ MonoBehaviour:
   _camera: {fileID: 963194227}
   _selectedObject: {fileID: 11400000, guid: 7141aae4b16134e49af0215b6da77bcf, type: 2}
   _eventSystem: {fileID: 467524304}
+  _selectableObject: {fileID: 11400000, guid: 46cd60c6c3a1fed488ca047229cfdb3d, type: 2}
   _groundClicksRMB: {fileID: 11400000, guid: 2b897e41a5c34e9419c18e2f8d7cd113, type: 2}
   _groundTransform: {fileID: 168921229}
 --- !u!1 &168921228
@@ -1129,6 +1130,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 227755229944066459, guid: 5dd235a43d36f9347a1a35df441f10d9, type: 3}
+      propertyPath: _transformValue
+      value: 
+      objectReference: {fileID: 11400000, guid: 46cd60c6c3a1fed488ca047229cfdb3d, type: 2}
     - target: {fileID: 417910617687609525, guid: 5dd235a43d36f9347a1a35df441f10d9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

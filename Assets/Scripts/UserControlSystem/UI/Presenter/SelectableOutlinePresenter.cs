@@ -15,11 +15,11 @@
         private void OnEnable()
         {
             SelectObject(_selectedValue.CurrentValue);
-            _selectedValue.OnSelected += SelectObject;
+            _selectedValue.onNewValue += SelectObject;
         } 
 
         private void SelectObject(ISelectable selectedObject) => 
             _outline.enabled = selectedObject != null && _selectable == selectedObject;
 
-        private void OnDisable() => _selectedValue.OnSelected -= SelectObject;
+        private void OnDisable() => _selectedValue.onNewValue -= SelectObject;
     }

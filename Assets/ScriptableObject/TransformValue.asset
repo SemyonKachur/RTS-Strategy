@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30a9c83e9bf56ad44a3ad397a10bffef, type: 3}
-  m_Name: AssetsContext
+  m_Script: {fileID: 11500000, guid: 13a5a58e5b7a4369a798a1d5a46bb0f2, type: 3}
+  m_Name: TransformValue
   m_EditorClassIdentifier: 
-  _objects:
-  - {fileID: 8086933696396606600, guid: cde3355a7be18a343b446a3abaa519c6, type: 3}

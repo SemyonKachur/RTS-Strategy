@@ -7,6 +7,6 @@ namespace UserControlSystem.CommandsRealization
     {
         public Transform Target { get; set; }
 
-        public void SetTarget(Transform target) => Target = target;
+        public AttackCommand(Transform target) => Target = target;
     }
 }

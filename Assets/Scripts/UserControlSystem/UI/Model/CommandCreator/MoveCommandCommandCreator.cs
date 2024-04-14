@@ -13,9 +13,14 @@ namespace UserControlSystem
         private Action<IMoveCommand> _creationCallback;
 
         [Inject]
-        private void Init(Vector3Value groundClicks) => groundClicks.OnNewValue += onNewValue;
+        private void Init(Vector3Value groundClicks)
+        {
+            groundClicks.onNewValue += OnNewValue;
+            Debug.LogError("MOVE INIT");
+        } 
 
-        private void onNewValue(Vector3 groundClick) => _creationCallback?.Invoke(_context.Inject(new MoveCommand(groundClick)));
+        private void OnNewValue(Vector3 groundClick) 
+            => _creationCallback?.Invoke(_context.Inject(new MoveCommand(groundClick)));
 
         protected override void ClassSpecificCommandCreation(Action<IMoveCommand> creationCallback)
             => _creationCallback = creationCallback;
