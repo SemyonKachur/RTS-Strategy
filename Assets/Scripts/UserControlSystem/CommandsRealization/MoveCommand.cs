@@ -3,10 +3,13 @@ using UnityEngine;
 
 namespace UserControlSystem.CommandsRealization
 {
-    public class MoveCommand: IMoveCommand
+    public sealed class MoveCommand : IMoveCommand
     {
-        public Vector3 Position { get; set; }
-
-        public void MoveTo(Vector3 pos) => Position = pos;
+        public Vector3 Target { get; }
+        
+        public MoveCommand(Vector3 target)
+        {
+            Target = target;
+        }
     }
 }

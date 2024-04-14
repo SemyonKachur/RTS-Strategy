@@ -8,7 +8,7 @@ namespace Core.Mobs
     {
         public override void ExecuteSpecificCommand(IMoveCommand command)
         {
-            Debug.Log($"Move to {command.Position}");
+            Debug.Log($"Move to {command.Target}");
         }
     }
 }
