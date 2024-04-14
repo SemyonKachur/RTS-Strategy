@@ -1,15 +1,29 @@
 ﻿using System;
 using Abstractions.Commands.CommandsInterfaces;
+using UnityEngine;
 using UserControlSystem.CommandsRealization;
+using Utils;
 using Zenject;
 
 namespace UserControlSystem
 {
     public class MoveCommandCommandCreator : CommandCreatorBase<IMoveCommand>
     {
-        [Inject] private Vector3Value _vector3Value = default;
+        [Inject] private AssetsContext _context;
+        private Action<IMoveCommand> _creationCallback;
+
+        [Inject]
+        private void Init(Vector3Value groundClicks) => groundClicks.OnNewValue += onNewValue;
+
+        private void onNewValue(Vector3 groundClick) => _creationCallback?.Invoke(_context.Inject(new MoveCommand(groundClick)));
+
+        protected override void ClassSpecificCommandCreation(Action<IMoveCommand> creationCallback)
+            => _creationCallback = creationCallback;
         
-        protected override void ClassSpecificCommandCreation(Action<IMoveCommand> creationCallback) 
-            => creationCallback?.Invoke(new MoveCommand(_vector3Value.CurrentValue));
+        public override void ProcessCancel()
+        {
+            base.ProcessCancel();
+            _creationCallback = null;
+        }
     }
 }
