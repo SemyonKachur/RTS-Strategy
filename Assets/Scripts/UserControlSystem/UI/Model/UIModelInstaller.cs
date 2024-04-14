@@ -24,6 +24,10 @@ namespace UserControlSystem
                 .To<AttackCommandCommandCreator>().AsTransient();
             Container.Bind<CommandCreatorBase<IMoveCommand>>()
                 .To<MoveCommandCommandCreator>().AsTransient();
+            Container.Bind<CommandCreatorBase<IPatrolCommand>>()
+                .To<PatrolCommandCommandCreator>().AsTransient();
+            Container.Bind<CommandCreatorBase<IStopCommand>>()
+                .To<StopCommandCommandCreator>().AsTransient();
             
             Container.Bind<CommandButtonsModel>().AsTransient();
         }

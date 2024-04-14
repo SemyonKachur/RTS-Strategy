@@ -14,6 +14,8 @@ namespace UserControlSystem
         [Inject] private CommandCreatorBase<IProduceUnitCommand> _unitProducer;
         [Inject] private CommandCreatorBase<IMoveCommand> _mover;
         [Inject] private CommandCreatorBase<IAttackCommand> _attacker;
+        [Inject] private CommandCreatorBase<IPatrolCommand> _patroller;
+        [Inject] private CommandCreatorBase<IStopCommand> _stoppable;
 
         private bool _commandIsPending;
 
@@ -29,6 +31,8 @@ namespace UserControlSystem
             _unitProducer.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(commandExecutor, command));
             _mover.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(commandExecutor, command));
             _attacker.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(commandExecutor, command));
+            _stoppable.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(commandExecutor, command));
+            _patroller.ProcessCommandExecutor(commandExecutor, command => ExecuteCommandWrapper(commandExecutor, command));
         }
 
         public void ExecuteCommandWrapper(ICommandExecutor commandExecutor, object command)
@@ -49,6 +53,8 @@ namespace UserControlSystem
             _unitProducer.ProcessCancel();
             _mover.ProcessCancel();
             _attacker.ProcessCancel();
+            _patroller.ProcessCancel();
+            _stoppable.ProcessCancel();
             OnCommandCancel?.Invoke();
         }
     }
