@@ -181,12 +181,13 @@ GameObject:
   - component: {fileID: 168921232}
   - component: {fileID: 168921231}
   - component: {fileID: 168921230}
+  - component: {fileID: 168921233}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &168921229
 Transform:
@@ -277,6 +278,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 168921228}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &168921233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168921228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 00c712282d287484e8302c58ae203470, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1 &207326064
 GameObject:
   m_ObjectHideFlags: 0
@@ -1436,6 +1468,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1748817644}
     m_Modifications:
+    - target: {fileID: 4268818134698289205, guid: cde3355a7be18a343b446a3abaa519c6, type: 3}
+      propertyPath: agent
+      value: 
+      objectReference: {fileID: 7882950100436050201}
     - target: {fileID: 8086933696396606600, guid: cde3355a7be18a343b446a3abaa519c6, type: 3}
       propertyPath: m_Name
       value: Chomper
@@ -1488,6 +1524,11 @@ PrefabInstance:
 --- !u!4 &7882950100436050199 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8210288797997970921, guid: cde3355a7be18a343b446a3abaa519c6, type: 3}
+  m_PrefabInstance: {fileID: 6837328260480367103}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &7882950100436050201 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 6510878699558915504, guid: cde3355a7be18a343b446a3abaa519c6, type: 3}
   m_PrefabInstance: {fileID: 6837328260480367103}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9198275438746970325

@@ -28,7 +28,6 @@ namespace UserControlSystem
 
         public static async Task<TResult> WithCancellation<TResult>(this IAwaitable<TResult> originalTask, CancellationToken cancellationToken) =>
             await WithCancellation(originalTask.AsTask(), cancellationToken);
-
-
+        
     }
 }
