@@ -5,8 +5,13 @@ namespace UserControlSystem.CommandsRealization
 {
     public class PatrolCommand : IPatrolCommand
     {
-        public Vector3 Target { get; protected set; }
+        public PatrolCommand(Vector3 target, Vector3 groundClick)
+        {
+            From = target;
+            To = groundClick;
+        } 
         
-        public PatrolCommand(Vector3 target) => Target = target;
+        public Vector3 From { get; }
+        public Vector3 To { get; }
     }
 }

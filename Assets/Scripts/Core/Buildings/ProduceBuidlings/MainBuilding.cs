@@ -5,7 +5,9 @@ using UnityEngine;
 
 public sealed class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISelectable
 {
-    public float Health => _health;
+    public Transform PivotPoint => this.transform;
+    public float Health { get; } = 1000;
+
     public float MaxHealth => _maxHealth;
     public Sprite Icon => _icon;
 
@@ -13,8 +15,6 @@ public sealed class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISe
 
     [SerializeField] private float _maxHealth = 1000;
     [SerializeField] private Sprite _icon;
-
-    private float _health = 1000;
 
     public override void ExecuteSpecificCommand(IProduceUnitCommand command) 
         => Instantiate(command.UnitPrefab, 

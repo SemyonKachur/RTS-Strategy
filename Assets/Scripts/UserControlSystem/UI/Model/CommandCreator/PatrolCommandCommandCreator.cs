@@ -10,7 +10,9 @@ namespace UserControlSystem
     public class PatrolCommandCommandCreator : CommandCreatorBase<IPatrolCommand>
     {
         [Inject] private AssetsContext _context;
-        private Action<IPatrolCommand> _patrolCallback;
+        [Inject] private SelectableValue _selectable;
+        
+        private Action<IPatrolCommand> _creationCallback;
         private Vector3Value vector3Value = default;
 
         [Inject]
@@ -19,13 +21,15 @@ namespace UserControlSystem
 
         private void OnNewValue(Vector3 groundClick)
         {
-            _patrolCallback?.Invoke(_context.Inject(new PatrolCommand(groundClick)));
+            _creationCallback?.Invoke(_context.Inject(new
+                PatrolCommand(_selectable.CurrentValue.PivotPoint.position, groundClick)));
+            _creationCallback = null;
             vector3Value.onNewValue -= OnNewValue;
         }
 
         protected override void ClassSpecificCommandCreation(Action<IPatrolCommand> creationCallback)
         {
-            _patrolCallback = creationCallback;
+            _creationCallback = creationCallback;
             vector3Value.onNewValue += OnNewValue;
         }
 
@@ -33,7 +37,7 @@ namespace UserControlSystem
         {
             base.ProcessCancel();
             vector3Value.onNewValue -= OnNewValue;
-            _patrolCallback = null;
+            _creationCallback = null;
         }
     }
 }

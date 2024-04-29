@@ -11,27 +11,27 @@ namespace UserControlSystem
     {
         [Inject] private AssetsContext _context;
         private Action<IAttackCommand> _attackCallback;
-        private TransformValue _transformValue = default;
+        private Vector3Value _vector3Value = default;
         
         [Inject]
-        private void Init(TransformValue transformClicks) => _transformValue = transformClicks;
+        private void Init(Vector3Value transformClicks) => _vector3Value = transformClicks;
 
-        private void OnNewValue(Transform enemyClick)
+        private void OnNewValue(Vector3 enemyClick)
         {
              _attackCallback?.Invoke(_context.Inject(new AttackCommand(enemyClick)));
-             _transformValue.onNewValue -= OnNewValue;
+             _vector3Value.onNewValue -= OnNewValue;
         }
 
         protected override void ClassSpecificCommandCreation(Action<IAttackCommand> creationCallback)
         {
             _attackCallback = creationCallback;
-            _transformValue.onNewValue += OnNewValue;
+            _vector3Value.onNewValue += OnNewValue;
         } 
 
         public override void ProcessCancel()
         {
             base.ProcessCancel();
-            _transformValue.onNewValue -= OnNewValue;
+            _vector3Value.onNewValue -= OnNewValue;
             _attackCallback = null;
         }
     }

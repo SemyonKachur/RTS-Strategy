@@ -5,9 +5,11 @@ namespace Core.Mobs
 
     public class SelectableUnit : MonoBehaviour, ISelectable
     {
+        public Transform PivotPoint => transform;
+        
         public float Health => health;
         [SerializeField, Min(0)] protected float health = 100;
-        
+
         public float MaxHealth => maxHealth;
         [SerializeField,Min(1)] protected float maxHealth = 100;
 

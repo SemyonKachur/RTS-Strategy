@@ -5,8 +5,8 @@ namespace UserControlSystem.CommandsRealization
 {
     public class AttackCommand : IAttackCommand
     {
-        public Transform Target { get; set; }
+        public Vector3 Target { get; set; }
 
-        public AttackCommand(Transform target) => Target = target;
+        public AttackCommand(Vector3 target) => Target = target;
     }
 }

@@ -4,6 +4,6 @@
 
     public interface IAttackCommand : ICommand
     {
-        Transform Target { get; set; }
+        Vector3 Target { get; set; }
     }
 }

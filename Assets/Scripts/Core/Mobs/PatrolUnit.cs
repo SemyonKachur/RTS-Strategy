@@ -8,7 +8,7 @@ namespace Core.Mobs
     {
         public override void ExecuteSpecificCommand(IPatrolCommand command)
         {
-            Debug.Log("Patrolling");
+            Debug.Log($"Patrolling from {command.From} to {command.To}");
         }
     }
 }
