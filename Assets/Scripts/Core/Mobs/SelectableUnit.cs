@@ -1,9 +1,11 @@
+using Abstractions.Commands;
+
 namespace Core.Mobs
 {
     using Abstractions;
     using UnityEngine;
 
-    public class SelectableUnit : MonoBehaviour, ISelectable
+    public class SelectableUnit : MonoBehaviour, ISelectable, IAttackable
     {
         public Transform PivotPoint => transform;
         

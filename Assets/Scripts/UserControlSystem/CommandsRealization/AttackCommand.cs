@@ -1,12 +1,12 @@
-﻿using Abstractions.Commands.CommandsInterfaces;
-using UnityEngine;
+﻿using Abstractions.Commands;
+using Abstractions.Commands.CommandsInterfaces;
 
 namespace UserControlSystem.CommandsRealization
 {
     public class AttackCommand : IAttackCommand
     {
-        public Vector3 Target { get; set; }
+        public IAttackable Target { get; set; }
 
-        public AttackCommand(Vector3 target) => Target = target;
+        public AttackCommand(IAttackable target) => Target = target;
     }
 }
