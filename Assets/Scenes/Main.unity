@@ -1468,10 +1468,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1748817644}
     m_Modifications:
-    - target: {fileID: 4268818134698289205, guid: cde3355a7be18a343b446a3abaa519c6, type: 3}
-      propertyPath: agent
-      value: 
-      objectReference: {fileID: 7882950100436050201}
     - target: {fileID: 8086933696396606600, guid: cde3355a7be18a343b446a3abaa519c6, type: 3}
       propertyPath: m_Name
       value: Chomper
@@ -1524,11 +1520,6 @@ PrefabInstance:
 --- !u!4 &7882950100436050199 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8210288797997970921, guid: cde3355a7be18a343b446a3abaa519c6, type: 3}
-  m_PrefabInstance: {fileID: 6837328260480367103}
-  m_PrefabAsset: {fileID: 0}
---- !u!195 &7882950100436050201 stripped
-NavMeshAgent:
-  m_CorrespondingSourceObject: {fileID: 6510878699558915504, guid: cde3355a7be18a343b446a3abaa519c6, type: 3}
   m_PrefabInstance: {fileID: 6837328260480367103}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9198275438746970325
