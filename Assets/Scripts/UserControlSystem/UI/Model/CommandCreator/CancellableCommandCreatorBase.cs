@@ -18,7 +18,7 @@ namespace UserControlSystem.UI.Model.CommandCreator
             _ctSource = new CancellationTokenSource();
             try
             {
-                TArgument argument = await _awaitableArgument.WithCancellation(_ctSource.Token);
+                TArgument argument = await _awaitableArgument.WithCancellation(_ctSource.Token);    
                 creationCallback?.Invoke(_context.Inject(CreateCommand(argument)));
             }
             catch
