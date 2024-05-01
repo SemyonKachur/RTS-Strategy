@@ -1,5 +1,6 @@
 namespace Core.Mobs
 {
+    using System.Threading;
     using UserControlSystem;
     using UnityEngine.AI;
     using UnityEngine;
@@ -11,6 +12,7 @@ namespace Core.Mobs
         [SerializeField] private UnitMovementStop _stop;
         [SerializeField] private NavMeshAgent _agent = default;
         [SerializeField] private Animator _animator = default;
+        [SerializeField] private StoppableUnit _stopCommand = default;
 
         private const string IDLE = "Idle";
         private const string MOVE = "Move";
@@ -18,9 +20,19 @@ namespace Core.Mobs
         public override async void ExecuteSpecificCommand(IMoveCommand command)
         {
             _agent.SetDestination(command.Target);
-            _animator.SetTrigger(MOVE);
-            await _stop;
-            _animator.SetTrigger(IDLE);
+            _animator.SetTrigger(Animator.StringToHash(MOVE));
+            _stopCommand.CancellationTokenSource = new CancellationTokenSource();
+            try
+            {
+                await _stop.WithCancellation(_stopCommand.CancellationTokenSource.Token);
+            }
+            catch
+            {
+                _agent.isStopped = true;
+                _agent.ResetPath();
+            }
+            _stopCommand.CancellationTokenSource = null;
+            _animator.SetTrigger(Animator.StringToHash(IDLE));
         }
     }
 }
