@@ -1,69 +1,85 @@
-﻿using System.Linq;
-using Abstractions;
-using Abstractions.Commands;
-using UnityEngine;
-using UnityEngine.EventSystems;
-using UserControlSystem;
-
-public sealed class MouseInteractionPresenter : MonoBehaviour
+﻿namespace UserControlSystem.UI.Presenter
 {
-    [SerializeField] private Camera _camera;
-    [SerializeField] private SelectableValue _selectedObject;
-    [SerializeField] private EventSystem _eventSystem;
+    using System;
+    using System.Linq;
+    using Abstractions;
+    using Abstractions.Commands;
+    using UniRx;
+    using UnityEngine;
 
-    [SerializeField] private AttackableValue _attackablesRMB;
-    [SerializeField] private Vector3Value _groundClicksRMB;
-    [SerializeField] private Transform _groundTransform;
-    
-    private Plane _groundPlane;
-    private RaycastHit[] _hits = default;
-    private ISelectable _selectable = default;
-    
-    private void Start() => _groundPlane = new Plane(_groundTransform.up, 0);
-
-    private void Update()
+    public sealed class MouseInteractionPresenter : MonoBehaviour
     {
-        if (!Input.GetMouseButtonUp(0) && !Input.GetMouseButton(1))
+        [SerializeField]
+        private Camera _camera;
+        [SerializeField]
+        private SelectableValue _selectedObject;
+        [SerializeField]
+        private AttackableValue _attackablesRMB;
+        [SerializeField]
+        private Vector3Value _groundClicksRMB;
+        [SerializeField]
+        private Transform _groundTransform;
+
+        private IObservable<long> _leftButtonStream = default;
+        private IObservable<long> _rightButtonStream = default;
+
+        private Ray _ray = default;
+        private Plane _groundPlane;
+        private RaycastHit[] _hits = default;
+        private ISelectable _selectable = default;
+
+        private void Start()
         {
-            return;
+            _groundPlane = new Plane(_groundTransform.up, 0);
+
+            _leftButtonStream = Observable.EveryUpdate().Where(_ => Input.GetMouseButtonDown(0));
+            _leftButtonStream.Subscribe(SelectItem);
+
+            _rightButtonStream = Observable.EveryUpdate().Where(_ => Input.GetMouseButtonDown(1));
+            _rightButtonStream.Subscribe(ActionCommand);
         }
-        if (_eventSystem.IsPointerOverGameObject())
+
+        private void SelectItem(long stream)
         {
-            return;
-        }
-        var ray = _camera.ScreenPointToRay(Input.mousePosition);
-        var hits = Physics.RaycastAll(ray);
-        if (Input.GetMouseButtonUp(0))
-        {
-            if (IsHit<ISelectable>(hits, out var selectable))
+            SendRaycast();
+            if (IsHit(_hits, out ISelectable selectable))
             {
                 _selectedObject.SetValue(selectable);
             }
         }
-        else
+
+        private void ActionCommand(long stream)
         {
-            if (IsHit<IAttackable>(hits, out var attackable))
+            SendRaycast();
+            if (IsHit(_hits, out IAttackable attackable))
             {
                 _attackablesRMB.SetValue(attackable);
             }
-            else if (_groundPlane.Raycast(ray, out var enter))
+            else if (_groundPlane.Raycast(_ray, out float enter))
             {
-                _groundClicksRMB.SetValue(ray.origin + ray.direction * enter);
+                _groundClicksRMB.SetValue(_ray.origin + _ray.direction * enter);
             }
         }
-    }
-    
-    private bool IsHit<T>(RaycastHit[] hits, out T result) where T : class
-    {
-        result = default;
-        if (hits.Length == 0)
+
+        private void SendRaycast()
         {
-            return false;
+            _ray = _camera.ScreenPointToRay(Input.mousePosition);
+            _hits = Physics.RaycastAll(_ray);
         }
-        result = hits
-            .Select(hit => hit.collider.GetComponentInParent<T>())
-            .Where(c => c != null)
-            .FirstOrDefault();
-        return result != default;
+
+        private bool IsHit<T>(RaycastHit[] hits, out T result) where T : class
+        {
+            result = default;
+            if (hits.Length == 0)
+            {
+                return false;
+            }
+
+            result = hits
+                .Select(hit => hit.collider.GetComponentInParent<T>())
+                .Where(c => c != null)
+                .FirstOrDefault();
+            return result != default;
+        }
     }
 }
