@@ -6,11 +6,14 @@
     using Abstractions.Commands;
     using UniRx;
     using UnityEngine;
+    using UnityEngine.EventSystems;
 
     public sealed class MouseInteractionPresenter : MonoBehaviour
     {
         [SerializeField]
         private Camera _camera;
+        [SerializeField]
+        private EventSystem _eventSystem = default;
         [SerializeField]
         private SelectableValue _selectedObject;
         [SerializeField]
@@ -22,6 +25,7 @@
 
         private IObservable<long> _leftButtonStream = default;
         private IObservable<long> _rightButtonStream = default;
+        private IObservable<long> _nonBlockedByUiFramesStream = default;
 
         private Ray _ray = default;
         private Plane _groundPlane;
@@ -31,11 +35,13 @@
         private void Start()
         {
             _groundPlane = new Plane(_groundTransform.up, 0);
-
-            _leftButtonStream = Observable.EveryUpdate().Where(_ => Input.GetMouseButtonDown(0));
+            _nonBlockedByUiFramesStream = Observable.EveryUpdate()
+                .Where(_ => !_eventSystem.IsPointerOverGameObject());
+            
+            _leftButtonStream = _nonBlockedByUiFramesStream.Where(_ => Input.GetMouseButtonDown(0));
             _leftButtonStream.Subscribe(SelectItem);
 
-            _rightButtonStream = Observable.EveryUpdate().Where(_ => Input.GetMouseButtonDown(1));
+            _rightButtonStream = _nonBlockedByUiFramesStream.Where(_ => Input.GetMouseButtonDown(1));
             _rightButtonStream.Subscribe(ActionCommand);
         }
 

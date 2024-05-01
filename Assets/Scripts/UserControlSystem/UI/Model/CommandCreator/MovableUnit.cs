@@ -31,6 +31,10 @@ namespace Core.Mobs
                 _agent.isStopped = true;
                 _agent.ResetPath();
             }
+            
+            _agent.isStopped = true;
+            _agent.ResetPath();
+            
             _stopCommand.CancellationTokenSource = null;
             _animator.SetTrigger(Animator.StringToHash(IDLE));
         }
